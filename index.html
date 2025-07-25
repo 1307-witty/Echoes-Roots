@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes & Roots - Family Tree</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splash">
+        <div class="splash-content">
+            <div class="logo-container">
+                <div class="tree-icon">🌳</div>
+                <h1 class="app-title">Echoes & Roots</h1>
+            </div>
+            <p class="app-subtitle">Carried by voice, grounded by roots</p>
+            <p class="app-description">Connect generations through voices, memories, and love</p>
+            <button class="enter-btn" onclick="startApp()">
+                <span>Begin Your Journey</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+        <div class="floating-elements">
+            <div class="leaf leaf-1">🍃</div>
+            <div class="leaf leaf-2">🌿</div>
+            <div class="leaf leaf-3">🍃</div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div class="main-app hidden" id="main">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🌳</span>
+                    <span class="logo-text">Echoes & Roots</span>
+                </div>
+                <nav class="main-nav">
+                    <button class="nav-item active" data-view="tree" onclick="switchView('tree')"><span
+                            class="nav-icon">🌳</span><span class="nav-text">Family Tree</span></button>
+                    <button class="nav-item" data-view="add" onclick="switchView('add')"><span
+                            class="nav-icon">➕</span><span class="nav-text">Add Member</span></button>
+                    <button class="nav-item" data-view="gallery" onclick="switchView('gallery')"><span
+                            class="nav-icon">📸</span><span class="nav-text">Gallery</span></button>
+                    <button class="nav-item" data-view="settings" onclick="switchView('settings')"><span
+                            class="nav-icon">⚙️</span><span class="nav-text">Settings</span></button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Tree View -->
+        <section class="view-section active" id="tree-view">
+            <div class="view-header">
+                <h2 class="view-title">Your Family Tree</h2>
+                <p class="view-subtitle">Click on any member to explore their story</p>
+            </div>
+            <div class="tree-container">
+                <div class="tree-connections">
+                    <svg class="connection-lines" viewBox="0 0 400 300">
+                        <path d="M200 150 L150 100" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+                        <path d="M200 150 L250 100" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+                        <path d="M150 100 L100 50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                        <path d="M150 100 L200 50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                        <path d="M250 100 L200 50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                        <path d="M250 100 L300 50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                    </svg>
+                </div>
+            </div>
+            <div class="tree-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="memberCount"></div>
+                    <div class="stat-label">Family Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="voiceCount"></div>
+                    <div class="stat-label">Voice Recordings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="photoCount"></div>
+                    <div class="stat-label">Photos Shared</div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Add Member View -->
+        <section class="view-section" id="add-view">
+            <div class="view-header">
+                <h2 class="view-title">Add Family Member</h2>
+                <p class="view-subtitle">Preserve their story for generations to come</p>
+            </div>
+            <form class="member-form" id="memberForm">
+                <!-- Step 1 -->
+                <div class="form-step active" id="step1">
+                    <div class="step-header">
+                        <h3>Basic Information</h3>
+                        <div class="step-indicator">Step 1 of 3</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="memberName" placeholder="Enter their full name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Relationship to You</label>
+                        <div class="select-wrapper">
+                            <select class="form-input relationship-select" id="memberRelation" required>
+                                <option value="" disabled selected>Choose their relationship to you</option>
+                                <option value="You">👤YOU</option>
+                                <optgroup label="📍 Parents">
+                                    <option value="father">👨 Father</option>
+                                    <option value="mother">👩 Mother</option>
+                                    <option value="stepfather">👨 Stepfather</option>
+                                    <option value="stepmother">👩 Stepmother</option>
+                                </optgroup>
+                                <optgroup label="👴 Grandparents">
+                                    <option value="grandfather">👴 Grandfather</option>
+                                    <option value="grandmother">👵 Grandmother</option>
+                                    <option value="great-grandfather">👴 Great Grandfather</option>
+                                    <option value="great-grandmother">👵 Great Grandmother</option>
+                                </optgroup>
+                                <optgroup label="👫 Siblings">
+                                    <option value="brother">👦 Brother</option>
+                                    <option value="sister">👧 Sister</option>
+                                    <option value="stepbrother">👦 Stepbrother</option>
+                                    <option value="stepsister">👧 Stepsister</option>
+                                </optgroup>
+                                <optgroup label="👨‍👩‍👧‍👦 Extended Family">
+                                    <option value="uncle">👨 Uncle</option>
+                                    <option value="aunt">👩 Aunt</option>
+                                    <option value="cousin">🧑 Cousin</option>
+                                    <option value="nephew">👦 Nephew</option>
+                                    <option value="niece">👧 Niece</option>
+                                </optgroup>
+                                <optgroup label="👶 Children">
+                                    <option value="son">👦 Son</option>
+                                    <option value="daughter">👧 Daughter</option>
+                                </optgroup>
+                                <optgroup label="💑 Partners">
+                                    <option value="spouse">💑 Spouse</option>
+                                    <option value="partner">💑 Partner</option>
+                                    <option value="father-in-law">👨 Father-in-law</option>
+                                    <option value="mother-in-law">👩 Mother-in-law</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Birth Date</label>
+                        <input type="date" class="form-input" id="memberBirthDate">
+                    </div>
+                    <button type="button" class="continue-btn" onclick="nextStep()">Continue</button>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="form-step" id="step2">
+                    <div class="step-header">
+                        <h3>Add Their Photo</h3>
+                        <div class="step-indicator">Step 2 of 3</div>
+                    </div>
+                    <div class="photo-upload-zone" id="photoUpload">
+                        <div class="upload-content">
+                            <div class="upload-icon">📷</div>
+                            <h4>Upload a Photo</h4>
+                            <p>Drag and drop or click to browse</p>
+                            <input type="file" id="photoInput" accept="image/*" hidden>
+                        </div>
+                        <div class="photo-preview hidden" id="photoPreview">
+                            <img id="previewImage" alt="Preview">
+                            <button type="button" class="remove-photo" onclick="removePhoto()">×</button>
+                        </div>
+                    </div>
+                    <div class="step-navigation">
+                        <button type="button" class="back-btn" onclick="prevStep()">Back</button>
+                        <button type="button" class="continue-btn" onclick="nextStep()">Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="form-step" id="step3">
+                    <div class="step-header">
+                        <h3>Record Their Voice</h3>
+                        <div class="step-indicator">Step 3 of 3</div>
+                    </div>
+                    <div class="voice-recorder">
+                        <div class="recorder-display">
+                            <div class="waveform">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                            <div class="recording-time" id="recordingTime">00:00</div>
+                        </div>
+                        <div class="recorder-controls">
+                            <button type="button" class="record-btn" id="recordBtn" onclick="toggleRecording()">
+                                <span class="record-icon"></span>
+                                <span class="record-text">Start Recording</span>
+                            </button>
+                        </div>
+                        <div class="audio-preview hidden" id="audioPreview">
+                            <div class="audio-player">
+                                <audio controls id="recordedAudio"></audio>
+                                <button type="button" class="remove-audio" onclick="removeAudio()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bio-section">
+                        <label class="form-label">Their Story</label>
+                        <textarea class="form-input bio-input" id="memberBio"
+                            placeholder="Share memories, favorite quotes, or what made them special..."></textarea>
+                    </div>
+                    <div class="step-navigation">
+                        <button type="button" class="back-btn" onclick="prevStep()">Back</button>
+                        <button type="submit" class="save-btn" onclick="saveMember()">Save to Family Tree</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Gallery View -->
+        <section class="view-section" id="gallery-view">
+            <div class="view-header">
+                <h2 class="view-title">Family Gallery</h2>
+                <p class="view-subtitle">Memories preserved for generations</p>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- Settings View -->
+        <section class="view-section" id="settings-view">
+            <div class="view-header">
+                <h2 class="view-title">Settings & Data Management</h2>
+                <p class="view-subtitle">Customize your family tree experience</p>
+            </div>
+            <div class="settings-container">
+                <div class="settings-section">
+                    <h3 class="settings-title">📊 Data Management</h3>
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Export Family Data</h4>
+                                <p>Download all your family information as a backup file</p>
+                            </div>
+                            <button class="setting-btn export-btn" onclick="exportFamilyData()"><span
+                                    class="btn-icon">📥</span><span>Export</span></button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Import Family Data</h4>
+                                <p>Restore your family tree from a backup file</p>
+                            </div>
+                            <button class="setting-btn import-btn" onclick="importFamilyData()"><span
+                                    class="btn-icon">📤</span><span>Import</span></button>
+                        </div>
+                        <div class="setting-item danger">
+                            <div class="setting-info">
+                                <h4>Clear All Data</h4>
+                                <p>⚠️ This will permanently delete all family members and data</p>
+                            </div>
+                            <button class="setting-btn danger-btn" onclick="clearAllData()"><span
+                                    class="btn-icon">🗑️</span><span>Clear All</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">🎨 Customization</h3>
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Tree Layout</h4>
+                                <p>Choose how your family tree is displayed</p>
+                            </div>
+                            <select class="setting-select" id="treeLayout" onchange="updateTreeLayout()">
+                                <option value="vertical">Vertical Layout</option>
+                                <option value="horizontal">Horizontal Layout</option>
+                                <option value="circular">Circular Layout</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Color Theme</h4>
+                                <p>Personalize your family tree colors</p>
+                            </div>
+                            <select class="setting-select" id="colorTheme" onchange="updateColorTheme()">
+                                <option value="default">Default Blue</option>
+                                <option value="forest">Forest Green</option>
+                                <option value="sunset">Sunset Orange</option>
+                                <option value="ocean">Ocean Blue</option>
+                                <option value="lavender">Lavender Purple</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">📱 App Information</h3>
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Version</h4>
+                                <p>Echoes & Roots v2.0.0</p>
+                            </div>
+                            <div class="setting-badge">Current</div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Storage Used</h4>
+                                <p id="storageInfo">Calculating...</p>
+                            </div>
+                            <div class="setting-badge" id="storageBadge">Loading</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Member Profile Modal -->
+        <div class="modal-overlay hidden" id="memberModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeMemberModal()">×</button>
+                <div class="profile-header">
+                    <div class="profile-photo-large">
+                        <img id="modalPhoto" alt="Member photo">
+                    </div>
+                    <div class="profile-details">
+                        <h2 id="modalName">Name</h2>
+                        <p class="profile-relation" id="modalRelation">Relationship</p>
+                        <p class="profile-birth" id="modalBirth">Birth Date</p>
+                    </div>
+                </div>
+                <div class="profile-story">
+                    <h3>Their Story</h3>
+                    <p id="modalBio">Biography will appear here...</p>
+                </div>
+                <div class="profile-actions">
+                    <button class="action-btn voice-btn" onclick="playMemberVoice()" id="playVoiceBtn"><span
+                            class="btn-icon">🔊</span><span>Play Voice</span></button>
+                    <button class="action-btn edit-btn" onclick="editMember()"><span
+                            class="btn-icon">✏️</span><span>Edit</span></button>
+                    <button class="action-btn delete-btn" onclick="deleteMember()" id="deleteMemberBtn"><span
+                            class="btn-icon">🗑️</span><span>Delete</span></button>
+                </div>
+                <audio id="memberAudio" hidden></audio>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
